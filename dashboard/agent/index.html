@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>招聘就业 Agent 演示台</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header class="top">
+    <div>
+      <p class="eyebrow">中期汇报二 · 可交互演示</p>
+      <h1>招聘就业 Agent 演示台</h1>
+      <p class="sub">人岗匹配 · RAG召回溯源 · Function Calling · Prompt版本记录</p>
+    </div>
+    <div class="badges">
+      <span id="health">服务检测中</span>
+      <span>数据 11,821 条</span>
+    </div>
+  </header>
+
+  <nav class="tabs" aria-label="功能切换">
+    <button class="tab active" data-tab="agent">Agent 对话</button>
+    <button class="tab" data-tab="match">人岗匹配</button>
+    <button class="tab" data-tab="rag">RAG 检索</button>
+    <button class="tab" data-tab="models">聚类/模型</button>
+    <button class="tab" data-tab="prompts">Prompt 版本</button>
+  </nav>
+
+  <main>
+    <section id="agent" class="panel active">
+      <div class="grid-2">
+        <div>
+          <label>Prompt 版本
+            <select id="promptVersion">
+              <option value="v3">v3 匹配解释增强</option>
+              <option value="v2">v2 强制溯源问答</option>
+              <option value="v1">v1 基础问答</option>
+            </select>
+          </label>
+          <label>向 Agent 提问
+            <textarea id="agentMessage" rows="6" placeholder="例如：有哪些岗位要求Python技能？&#10;或：简历：本科，3年经验，Python SQL Pandas 机器学习。岗位：本科，3年，Python SQL Pandas Spark 机器学习。"></textarea>
+          </label>
+          <div class="row">
+            <button id="askAgent" class="primary">运行 Agent 工作流</button>
+            <button class="ghost" data-demo="python">示例：Python岗位</button>
+            <button class="ghost" data-demo="match">示例：人岗匹配</button>
+          </div>
+          <article class="card">
+            <h3>回答</h3>
+            <pre id="agentAnswer">等待提问...</pre>
+          </article>
+        </div>
+        <div>
+          <article class="card">
+            <h3>工作流步骤</h3>
+            <ol id="agentSteps"></ol>
+          </article>
+          <article class="card">
+            <h3>Function Calling</h3>
+            <pre id="agentTools">暂无</pre>
+          </article>
+          <article class="card">
+            <h3>问题-答案-来源</h3>
+            <div id="agentTriples" class="table-wrap"></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="match" class="panel">
+      <div class="grid-2">
+        <div>
+          <label>上传 PDF 简历（可选）
+            <input id="resumeFile" type="file" accept="application/pdf">
+          </label>
+          <div class="row">
+            <button id="extractResume" class="ghost">提取 PDF 文本</button>
+            <button id="recommendJobs" class="ghost">推荐岗位</button>
+          </div>
+          <p id="resumeStatus" class="sub"></p>
+          <label>简历文本<textarea id="resumeText" rows="8">本科，3年经验。熟悉 Python、SQL、Pandas、机器学习。地点上海。</textarea></label>
+          <label>岗位文本<textarea id="jobText" rows="8">本科，要求3年经验，熟悉Python、SQL、Pandas、Spark、机器学习。工作地点上海。</textarea></label>
+          <button id="runMatch" class="primary">计算匹配分</button>
+        </div>
+        <article class="card">
+          <h3>匹配结果</h3>
+          <div id="matchResult" class="kpis"></div>
+          <pre id="matchRaw">尚未计算</pre>
+          <h3>推荐岗位</h3>
+          <div id="recommendResult" class="table-wrap">上传或粘贴简历后可推荐</div>
+        </article>
+      </div>
+    </section>
+
+    <section id="rag" class="panel">
+      <div class="grid-2">
+        <div>
+          <label>业务问题<input id="ragQuestion" type="text" value="有哪些岗位要求Python技能？"></label>
+          <label>Top-k<select id="ragTopK"><option>3</option><option>5</option></select></label>
+          <button id="runRag" class="primary">检索并溯源</button>
+          <article class="card">
+            <h3>说明</h3>
+            <p>本页直接调用岗位知识库检索，返回 Top-k 文本块与来源元数据，可现场演示“问题—答案—来源”。</p>
+          </article>
+        </div>
+        <article class="card">
+          <h3>召回结果</h3>
+          <div id="ragResult" class="table-wrap"></div>
+        </article>
+      </div>
+    </section>
+
+    <section id="models" class="panel">
+      <div class="grid-2">
+        <article class="card">
+          <h3>聚类摘要</h3>
+          <pre id="clusterBox">加载中...</pre>
+        </article>
+        <article class="card">
+          <h3>多模型对比</h3>
+          <div id="modelBox" class="table-wrap">加载中...</div>
+        </article>
+      </div>
+    </section>
+
+    <section id="prompts" class="panel">
+      <article class="card">
+        <h3>Prompt 版本记录</h3>
+        <div id="promptBox" class="table-wrap">加载中...</div>
+      </article>
+      <article class="card">
+        <h3>当前 Prompt 预览</h3>
+        <pre id="promptPreview">在 Agent 页运行后显示</pre>
+      </article>
+    </section>
+  </main>
+
+  <footer>
+    本地演示地址：http://127.0.0.1:8765/ · 代码：src/agent/server.py
+  </footer>
+  <script src="/app.js"></script>
+</body>
+</html>
