@@ -1,0 +1,17 @@
+.git
+.idea
+.venv
+node_modules
+.codex-week3-ppt
+.codex-week3-docx
+tmp
+data/raw
+data/cleaned
+outputs/reports
+outputs/figures
+outputs/predictions
+outputs/matching
+outputs/tables/rag_runtime_cache.pkl
+__pycache__
+*.pyc
+*.log
