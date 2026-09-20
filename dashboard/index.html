@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>招聘就业数据分析看板</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <p class="eyebrow">招聘就业数据分析项目</p>
+      <h1>就业市场洞察看板</h1>
+    </div>
+    <div class="status"><span></span>数据已更新 <strong id="updatedAt">--</strong></div>
+  </header>
+
+  <main>
+    <section class="filters" aria-label="数据筛选">
+      <label>数据来源<select id="sourceFilter"><option value="全部">全部来源</option></select></label>
+      <label>地区<select id="locationFilter"><option value="全部">全部地区</option></select></label>
+      <label>学历要求<select id="educationFilter"><option value="全部">全部学历</option></select></label>
+      <label class="search">岗位关键词<input id="searchFilter" type="search" placeholder="搜索岗位或公司"></label>
+      <button id="resetButton" type="button" title="清除全部筛选">重置筛选</button>
+    </section>
+
+    <section class="kpis" aria-label="核心指标">
+      <article><span>筛选后岗位</span><strong id="jobCount">0</strong><small id="coverage">占全部样本 0%</small></article>
+      <article><span>平均月薪</span><strong id="avgSalary">--</strong><small>仅统计已公布薪资</small></article>
+      <article><span>高质量岗位</span><strong id="qualityRate">0%</strong><small>基于规则标签</small></article>
+      <article><span>覆盖地区</span><strong id="locationCount">0</strong><small>不含未说明地区</small></article>
+    </section>
+
+    <section class="grid">
+      <article class="panel span-7"><header><div><h2>地区岗位需求</h2><p>明确地区的岗位数量前 10</p></div></header><div id="locationChart" class="chart"></div></article>
+      <article class="panel span-5"><header><div><h2>月薪区间分布</h2><p>单位：千元/月</p></div></header><div id="salaryChart" class="chart"></div></article>
+      <article class="panel span-5"><header><div><h2>学历要求结构</h2><p>岗位学历门槛构成</p></div></header><div id="educationChart" class="chart"></div></article>
+      <article class="panel span-7"><header><div><h2>职业方向分布</h2><p>已标注岗位的主要业务方向</p></div></header><div id="categoryChart" class="chart"></div></article>
+      <article class="panel span-7"><header><div><h2>地区需求与薪资</h2><p>气泡大小代表岗位数量</p></div></header><div id="bubbleChart" class="chart"></div></article>
+      <article class="panel span-5"><header><div><h2>模型效果对比</h2><p>测试集核心评价指标</p></div></header><div id="modelChart" class="chart"></div></article>
+      <article class="panel span-12"><header><div><h2>岗位样本明细</h2><p>展示当前筛选结果中质量分最高的岗位</p></div><span id="tableCount" class="pill">0 条</span></header><div class="table-wrap"><table><thead><tr><th>岗位</th><th>公司</th><th>地区</th><th>学历</th><th>平均月薪</th><th>质量分</th></tr></thead><tbody id="jobTable"></tbody></table></div></article>
+    </section>
+  </main>
+  <footer>数据来源：国家大学生就业服务平台与海外远程岗位公开数据 · 结论仅代表当前样本</footer>
+  <script src="dashboard-data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
