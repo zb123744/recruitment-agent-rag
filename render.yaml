@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: recruitment-agent-rag
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements-deploy.txt
+    startCommand: gunicorn --chdir src --bind 0.0.0.0:$PORT --workers 1 --threads 4 --timeout 180 agent.flask_server:app
+    healthCheckPath: /api/health
+    envVars:
+      - key: HOST
+        value: 0.0.0.0
+      - key: JOB_DATA_PATH
+        value: data/deploy/recruitment_jobs_deploy.csv.gz
+      - key: RAG_CACHE_PATH
+        value: /tmp/rag_runtime_cache.pkl
+      - key: RAG_MAX_FEATURES
+        value: 8000
+      - key: PYTHON_VERSION
+        value: 3.12.8
