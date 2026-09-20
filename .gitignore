@@ -1,0 +1,16 @@
+.venv/
+__pycache__/
+*.pyc
+data/raw/*
+data/cleaned/*
+data/deploy/*
+!data/raw/.gitkeep
+!data/cleaned/.gitkeep
+!data/deploy/.gitkeep
+!data/deploy/recruitment_jobs_deploy.csv.gz
+*.log
+node_modules/
+.docker-config/
+.codex-week3-ppt/
+.codex-week3-docx/
+outputs/tables/rag_runtime_cache.pkl
