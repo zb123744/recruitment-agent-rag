@@ -1,0 +1,12 @@
+﻿id,kind,method,path,status,elapsed_ms,result,error
+N01,正常,GET,/api/health,200,96.41,通过,
+N02,正常,POST,/api/match,200,60.12,通过,
+N03,正常,POST,/api/rag,200,1740.6,通过,
+B01,边界,POST,/api/match,200,5.11,通过,
+B02,边界,POST,/api/rag,200,1827.97,通过,
+B03,边界,POST,/api/rag,200,1771.83,通过,
+B04,边界,POST,/api/agent,200,1803.35,通过,
+E01,异常,GET,/api/not-found,404,25.22,通过,HTTPError
+E02,异常,POST,/api/match,500,13.4,通过,HTTPError
+E03,异常,POST,/api/rag,200,1714.03,通过,
+E04,异常,POST,/api/agent,200,24.95,通过,
