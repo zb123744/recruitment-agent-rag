@@ -1,0 +1,6 @@
+{
+  "records": 11821,
+  "queries": 10,
+  "top_k": 3,
+  "top1_recall": 0.9
+}
