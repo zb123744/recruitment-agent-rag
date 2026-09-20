@@ -1,0 +1,22 @@
+{
+  "total": 11,
+  "passed": 11,
+  "failed": 0,
+  "pass_rate": 1.0,
+  "avg_elapsed_ms": 825.73,
+  "max_elapsed_ms": 1827.97,
+  "by_kind": {
+    "正常": {
+      "total": 3,
+      "passed": 3
+    },
+    "边界": {
+      "total": 4,
+      "passed": 4
+    },
+    "异常": {
+      "total": 4,
+      "passed": 4
+    }
+  }
+}
